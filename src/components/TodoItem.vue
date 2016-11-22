@@ -9,7 +9,7 @@
         v-model="todo.name"
         v-on:keyup.enter="editTodo"
        />
-    </li> 
+    </li>
 </template>
 
 <script>

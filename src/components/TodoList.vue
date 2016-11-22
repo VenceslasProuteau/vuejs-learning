@@ -13,15 +13,25 @@
           v-model="newTodo"
           v-on:keyup.enter="add"
           />
+          <span>{{count}}</span>
+        <button @click="decrement">decrement</button>
+        <button @click="increment">increment</button>
     </ul>
 </template>
 
 <script>
     import TodoItem from './TodoItem'
+    import { mapMutations } from 'vuex'
+
     export default {
       name: 'todoList',
       components: {
         TodoItem
+      },
+      computed: {
+        count () {
+          return this.$store.state.count
+        }
       },
       data () {
         return {
@@ -40,6 +50,16 @@
         }
       },
       methods: {
+        ...mapMutations({
+          increment: {
+            type: 'increment',
+            amount: 10
+          },
+          decrement: {
+            type: 'decrement',
+            amount: 5
+          }
+        }),
         add: function () {
           this.todolist.push({
             name: this.newTodo
