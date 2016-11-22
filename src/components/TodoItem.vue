@@ -1,12 +1,12 @@
 <template>
     <li class="todo-item">
-      <span v-if="!edit">{{todo.name}}</span>
+      <span v-if="!edit">{{todo.text}}</span>
       <button v-on:click="$emit('remove')">remove</button>
       <button v-on:click="edit = !edit">edit</button>
       <input
         v-if="edit"
         type="text"
-        v-model="todo.name"
+        v-model="todo.text"
         v-on:keyup.enter="editTodo"
        />
     </li>
@@ -30,3 +30,9 @@
       }
     }
 </script>
+
+<style scoped>
+.todo-item {
+  color: blue;
+}
+</style>
