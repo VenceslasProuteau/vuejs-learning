@@ -1,12 +1,22 @@
 <template>
     <ul class="todo-list">
+      <div>Still {{stillTodoCount}} tasks to do:</div>
       <TodoItem 
-        v-for="(todo, index) in todos"
+        v-for="todo in stillTodoList"
         v-bind:todo="todo"
-        v-on:remove="remove(index)"
-        v-on:edit="edit(index, todo.text)"
+        v-on:remove="remove(todo.id)"
+        v-on:edit="edit(todo.id, todo.text)"
         >
         </TodoItem>
+        <br />
+        <div>{{doneTodosCount}} tasks done:</div>
+        <TodoItem 
+          v-for="todo in doneTodos"
+          v-bind:todo="todo"
+          v-on:remove="remove(todo.id)"
+          v-on:edit="edit(todo.id, todo.text)"
+          >
+          </TodoItem>
         <input 
           type="text" 
           placeholder="Add New todo"
@@ -14,6 +24,7 @@
           v-on:keyup.enter="add"
           />
           <span>{{count}}</span>
+          <br />
         <button @click="decrement">decrement</button>
         <button @click="increment">increment</button>
     </ul>
@@ -35,7 +46,7 @@
         todos () {
           return this.$store.state.todos
         },
-        ...mapGetters(['doneTodos'])
+        ...mapGetters(['doneTodos', 'stillTodoList', 'doneTodosCount', 'stillTodoCount'])
       },
       data () {
         return {
@@ -55,18 +66,27 @@
         }),
         add: function () {
           this.todos.push({
-            id: Math.random(10, 100),
+            id: Math.random(),
             text: this.newTodo,
             done: false
           })
           this.newTodo = ''
         },
-        edit: function (index, value) {
-          console.log(this.todos[index])
-          this.todos[index].text = value
+        edit: function (id, value) {
+          const todoIndex = this.todos.findIndex(todo => {
+            return todo.id === id
+          })
+          this.todos[todoIndex].text = value
         },
-        remove: function (index) {
-          this.todos.splice(index, 1)
+        remove: function (id) {
+          const todoIndex = this.todos.findIndex(todo => {
+            return todo.id === id
+          })
+          if (this.todos[todoIndex].done) {
+            this.todos.splice(todoIndex, 1)
+          } else {
+            this.todos[todoIndex].done = true
+          }
         }
       }
     }

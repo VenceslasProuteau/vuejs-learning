@@ -28,6 +28,15 @@ const store = new Vuex.Store({
   getters: {
     doneTodos: state => {
       return state.todos.filter(todo => todo.done)
+    },
+    stillTodoList: state => {
+      return state.todos.filter(todo => !todo.done)
+    },
+    doneTodosCount: (state, getters) => {
+      return getters.doneTodos.length
+    },
+    stillTodoCount: (state, getters) => {
+      return getters.stillTodoList.length
     }
   },
   mutations: {
