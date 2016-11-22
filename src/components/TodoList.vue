@@ -1,10 +1,10 @@
 <template>
     <ul class="todo-list">
       <TodoItem 
-        v-for="(todo, index) in todolist"
+        v-for="(todo, index) in todos"
         v-bind:todo="todo"
         v-on:remove="remove(index)"
-        v-on:edit="edit(index, todo.name)"
+        v-on:edit="edit(index, todo.text)"
         >
         </TodoItem>
         <input 
@@ -21,7 +21,7 @@
 
 <script>
     import TodoItem from './TodoItem'
-    import { mapMutations } from 'vuex'
+    import { mapMutations, mapGetters } from 'vuex'
 
     export default {
       name: 'todoList',
@@ -31,22 +31,15 @@
       computed: {
         count () {
           return this.$store.state.count
-        }
+        },
+        todos () {
+          return this.$store.state.todos
+        },
+        ...mapGetters(['doneTodos'])
       },
       data () {
         return {
-          newTodo: '',
-          todolist: [
-            {
-              name: 'First item'
-            },
-            {
-              name: 'Second item'
-            },
-            {
-              name: 'Third item'
-            }
-          ]
+          newTodo: ''
         }
       },
       methods: {
@@ -61,16 +54,19 @@
           }
         }),
         add: function () {
-          this.todolist.push({
-            name: this.newTodo
+          this.todos.push({
+            id: Math.random(10, 100),
+            text: this.newTodo,
+            done: false
           })
           this.newTodo = ''
         },
         edit: function (index, value) {
-          this.todolist[index].name = value
+          console.log(this.todos[index])
+          this.todos[index].text = value
         },
         remove: function (index) {
-          this.todolist.splice(index, 1)
+          this.todos.splice(index, 1)
         }
       }
     }
