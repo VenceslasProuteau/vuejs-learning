@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import TodoList from './components/TodoList'
+import FooComponent from './components/FooComponent'
 import store from './store'
 /* eslint-disable no-new */
 
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/todos', component: TodoList }
+  { path: '/foo', component: FooComponent }
 ]
 const router = new VueRouter({
   routes

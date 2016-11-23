@@ -4,8 +4,8 @@
       <TodoItem 
         v-for="todo in stillTodoList"
         v-bind:todo="todo"
-        v-on:remove="remove(todo.id)"
-        v-on:edit="edit(todo.id, todo.text)"
+        v-on:remove="removeTodo(todo)"
+        v-on:edit="editTodo(todo)"
         >
         </TodoItem>
         <br />
@@ -13,20 +13,16 @@
         <TodoItem 
           v-for="todo in doneTodos"
           v-bind:todo="todo"
-          v-on:remove="remove(todo.id)"
-          v-on:edit="edit(todo.id, todo.text)"
+          v-on:remove="removeTodo(todo)"
+          v-on:edit="editTodo(todo)"
           >
           </TodoItem>
         <input 
           type="text" 
           placeholder="Add New todo"
           v-model="newTodo"
-          v-on:keyup.enter="add"
+          v-on:keyup.enter="addTodo(newTodo)"
           />
-          <span>{{count}}</span>
-          <br />
-        <button @click="decrement">decrement</button>
-        <button @click="increment">increment</button>
     </ul>
 </template>
 
@@ -40,9 +36,6 @@
         TodoItem
       },
       computed: {
-        count () {
-          return this.$store.state.count
-        },
         todos () {
           return this.$store.state.todos
         },
@@ -54,40 +47,7 @@
         }
       },
       methods: {
-        ...mapMutations({
-          increment: {
-            type: 'increment',
-            amount: 10
-          },
-          decrement: {
-            type: 'decrement',
-            amount: 5
-          }
-        }),
-        add: function () {
-          this.todos.push({
-            id: Math.random(),
-            text: this.newTodo,
-            done: false
-          })
-          this.newTodo = ''
-        },
-        edit: function (id, value) {
-          const todoIndex = this.todos.findIndex(todo => {
-            return todo.id === id
-          })
-          this.todos[todoIndex].text = value
-        },
-        remove: function (id) {
-          const todoIndex = this.todos.findIndex(todo => {
-            return todo.id === id
-          })
-          if (this.todos[todoIndex].done) {
-            this.todos.splice(todoIndex, 1)
-          } else {
-            this.todos[todoIndex].done = true
-          }
-        }
+        ...mapMutations(['addTodo', 'removeTodo', 'editTodo'])
       }
     }
 </script>

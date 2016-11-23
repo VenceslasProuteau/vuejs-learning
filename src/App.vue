@@ -2,6 +2,8 @@
   <div id="app">
     <img src="./assets/logo.png">
     <TodoList></TodoList>
+    <router-link to="/foo">Nav to Foo</router-link>
+    <router-view></router-view>
   </div>
 </template>
 

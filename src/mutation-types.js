@@ -1,2 +1,3 @@
-export const INCREMENT = 'increment'
-export const DECREMENT = 'decrement'
+export const REMOVE_TODO = 'removeTodo'
+export const EDIT_TODO = 'editTodo'
+export const ADD_TODO = 'addTodo'

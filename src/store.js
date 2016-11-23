@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { DECREMENT, INCREMENT } from './mutation-types'
+import { REMOVE_TODO, EDIT_TODO, ADD_TODO } from './mutation-types'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
     todos: [
       {
         id: 1,
@@ -40,11 +39,24 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    [INCREMENT] (state, payload) {
-      state.count += payload.amount
+    [REMOVE_TODO] (state, todo) {
+      const todoIndex = state.todos.indexOf(todo)
+      if (state.todos[todoIndex].done) {
+        state.todos.splice(todoIndex, 1)
+      } else {
+        state.todos[todoIndex].done = true
+      }
     },
-    [DECREMENT] (state, payload) {
-      state.count -= payload.amount
+    [EDIT_TODO] (state, todo) {
+      const todoIndex = state.todos.indexOf(todo)
+      state.todos[todoIndex].text = todo.text
+    },
+    [ADD_TODO] (state, text) {
+      state.todos.push({
+        id: Math.random(),
+        done: false,
+        text
+      })
     }
   }
 })
