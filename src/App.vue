@@ -2,7 +2,10 @@
   <div id="app">
     <img src="./assets/logo.png">
     <TodoList></TodoList>
-    <router-link to="/foo">Nav to Foo</router-link>
+      <router-link to="/foo">Nav to Foo</router-link>
+      <router-link to="/fooz">Nav to fooz</router-link>
+      <router-link to="/bar">Nav to bar</router-link>
+      <router-link to="/baz">Nav to baz</router-link>
     <router-view></router-view>
   </div>
 </template>
