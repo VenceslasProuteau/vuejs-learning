@@ -5,7 +5,8 @@
   "author": "venceslas prouteau <venceslas.prouteau@hotmail.fr>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "npm run mock && node build/dev-server.js",
+    "mock": "node mock/index.js",
     "build": "node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
