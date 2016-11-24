@@ -1,13 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-// Routes
-var players = require('./players/');
+var data = require('./data');
 
 router.get('/', function(req, res) {
-    res.send('Hello NBA');
+  res.send(data);
 });
-
-router.use('/players', players);
 
 module.exports = router;
