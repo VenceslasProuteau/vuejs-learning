@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from './App'
+import App from './components/App'
 import FooComponent from './components/FooComponent'
 import store from './store'
-/* eslint-disable no-new */
 
 Vue.use(VueRouter)
 
