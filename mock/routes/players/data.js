@@ -3,8 +3,9 @@ var lodash = require('lodash');
 var Chance = require('chance');
 var chance = new Chance();
 
-function generatePlayer() {
+function generatePlayer(i) {
   return {
+    id:        i,
     name:      chance.name(),
     birthdate: chance.birthday({ string: true, american: false })
   };
