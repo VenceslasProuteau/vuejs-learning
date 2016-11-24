@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="../assets/logo.png">
     <TodoList></TodoList>
     <router-link to="/foo">Nav to Foo</router-link>
     <router-view></router-view>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TodoList from './components/TodoList'
+import TodoList from './TodoList'
 export default {
   name: 'app',
   components: {
