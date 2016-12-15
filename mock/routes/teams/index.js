@@ -13,8 +13,8 @@ router.get('/:id', function(req, res) {
       id: id
   });
   team.roster = nba.players.filter(function (player) {
-  	return player.teamId = team.teamId;
-  });
+  	return player.teamId === team.teamId;
+  })[0];
   res.json(team);
 });
 
