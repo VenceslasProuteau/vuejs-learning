@@ -4,15 +4,18 @@ var router = express.Router();
 var nba = require('nba');
 
 router.get('/', function(req, res) {
-  res.json(nba.players);
+  res.json(nba.teams);
 });
 
 router.get('/:id', function(req, res) {
   var id = Number(req.params.id);
-  var player = lodash.find(nba.players, {
+  var team = lodash.find(nba.teams, {
       id: id
   });
-  res.json(player);
+  team.roster = nba.players.filter(function (player) {
+  	return player.teamId = team.teamId;
+  });
+  res.json(team);
 });
 
 module.exports = router;
