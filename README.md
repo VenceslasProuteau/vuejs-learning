@@ -8,7 +8,7 @@ Learning VueJS with mock API based on Express and ChanceJS
 
 ## How to use
 
-`npm run dev` and 'npm run mock' if you need a mock API
+`npm run dev` 
 
 ## How to test
 
